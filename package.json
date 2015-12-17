@@ -1,6 +1,6 @@
 {
   "name": "attachable",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Simple object to bidirectionally track its attachments (links,connections) to other `attachable` objects",
   "main": "app/index.js",
   "scripts": {
