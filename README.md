@@ -10,7 +10,7 @@
 
 # attachable
 
-Simple object to track a list of attached (linked) objects
+Simple object to bidirectionally track its attachments (links,connections) to other `attachable` objects
 
 
 If you have different needs regarding the functionality, please add a [feature request](https://github.com/alykoshin/attachable/issues).
@@ -23,6 +23,21 @@ npm install --save attachable
 ```
 
 ## Usage
+
+  attachTo(attachable)
+  Attach to specific `attachable` object (and also attach that object to this one)
+
+  detachFrom(attachable)
+  Detach from specific `attachable` object (and also attach that object from this one)
+  
+  detachAll() 
+  Detach object from all currently attached `attachable` objects
+
+  boolean hasAttached()
+  Allows to check if this object has other `attachable` objects attached to it (it is attached to some other `attachable` objects) 
+
+  boolean isAttachedTo(attachable)
+  Allows to check if the object attached to another `attachable` object
 
 
 ## Credits
