@@ -6,8 +6,9 @@
 
 if ( typeof module !== 'undefined' && typeof require !== 'undefined') {
   var debug = require('mini-debug');
-  var emitter = require('mini-emitter');
+  //var emitter = require('mini-emitter');
 }
+
 //var
 // SingleAttachable = function(that) {
 //
@@ -37,16 +38,17 @@ if ( typeof module !== 'undefined' && typeof require !== 'undefined') {
  * @constructor
  */
 var Attachable = function(self) {
-  if (!self.emit) {
-    emitter(self);
-  }
+  //if (!self.emit) {
+  //  emitter(self);
+  //}
 
   // Private properties
 
-  // Protected properties
-
   // Array of object to which this MultiAttachable is Attached
   var attachedTo = [];
+
+
+  // Protected properties
 
   /**
    * name attachingTo
@@ -54,52 +56,69 @@ var Attachable = function(self) {
    * @param {Attachable} attachable
    */
   self._attachingTo = function( attachable ) {
-    debug.debug('Attachable.attachingTo(', attachable, ')');
+    //debug.debug('Attachable.attachingTo(', attachable, ')');
     attachedTo.push(attachable);
+    return true;
   };
 
   self._detachingFrom = function( attachable ) {
-    debug.debug('Attachable.detachingFrom(', attachable, ')');
+    //debug.debug('Attachable.detachingFrom(', attachable, ')');
     for (var i = attachedTo.length-1; i >= 0; i--) {
       if (attachedTo[i] === attachable) {
-        attachedTo.slice(i, 1);
+        attachedTo.splice(i, i+1);
+        return true;
       }
     }
+    debug.error('Attachable.detachingFrom(): Unable to detachFrom(): object not attached');
+    return false;
   };
 
   // Public methods
 
   self.attachTo = function(attachable) {
-    debug.debug('Attachable.attachTo(', attachable, ')');
-    self._attachingTo(attachable);
-    attachable._attachingTo(self);
+    //debug.debug('Attachable.attachTo(', attachable, ')');
+    var res = self._attachingTo(attachable);
+    if (self !== attachable) {
+      res = res && attachable._attachingTo(self);
+    }
+    return res;
   };
 
   self.detachFrom = function(attachable) {
-    debug.debug('Attachable.detachFrom(', attachable, ')');
-    self._detachingFrom(attachable);
-    attachable._detachingFrom(self);
+    //debug.debug('Attachable.detachFrom(', attachable, ')');
+    var res = self._detachingFrom(attachable);
+    if (self !== attachable) {
+      res = res && attachable._detachingFrom(self);
+    }
+    return res;
   };
 
   self.detachAll = function() {
+    debug.debug('Attachable.detachAll()');
+    var res = true;
     for (var i = attachedTo.length-1; i >= 0; i--) {
-      attachedTo[i].detach( self ); // Attachable.detach() will call self.detachingFrom()
+      res = res && self.detachFrom( attachedTo[i] ); // Attachable.detach() will call self.detachingFrom()
     }
+    return res;
   };
 
   self.hasAttached = function () {
-    debug.debug('Attachable.isAttached()');
+    //debug.debug('Attachable.isAttached()');
     return ( attachedTo.length > 0 );
   };
 
   self.isAttachedTo = function (attachable) {
-    debug.debug('Attachable.isAttached(', attachable, ')');
+    //debug.debug('Attachable.isAttached(', attachable, ')');
     for (var i = attachedTo.length-1; i >= 0; i--) {
       if (attachedTo[i] === attachable) {
         return true;
       }
     }
     return false;
+  };
+
+  self.getAttached = function() {
+    return attachedTo;
   };
 
   return self;

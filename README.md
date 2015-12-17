@@ -12,6 +12,12 @@
 
 Simple object to bidirectionally track its attachments (links,connections) to other `attachable` objects
 
+You can 
+```
+obj1.attachTo(obj2)
+```
+And later
+obj2.attachedTo(obj1);
 
 If you have different needs regarding the functionality, please add a [feature request](https://github.com/alykoshin/attachable/issues).
 
@@ -24,20 +30,53 @@ npm install --save attachable
 
 ## Usage
 
-  attachTo(attachable)
-  Attach to specific `attachable` object (and also attach that object to this one)
+```
+// var attachable=require('attachable');
+var attachable=require('./index.js');
+var obj1={}; attachable(obj1);
+var obj2={}; attachable(obj2);
 
-  detachFrom(attachable)
-  Detach from specific `attachable` object (and also attach that object from this one)
-  
-  detachAll() 
-  Detach object from all currently attached `attachable` objects
+obj1.attachTo(obj2);
 
-  boolean hasAttached()
-  Allows to check if this object has other `attachable` objects attached to it (it is attached to some other `attachable` objects) 
+obj2.isAttachedTo(obj1);
+// true
+obj1.isAttachedTo(obj2);
+// true
 
-  boolean isAttachedTo(attachable)
-  Allows to check if the object attached to another `attachable` object
+obj2.detachFrom(obj1)
+obj2.isAttachedTo(obj1);
+// false
+obj1.isAttachedTo(obj2);
+// false
+
+```
+
+## Methods
+
+```
+attachTo(attachable)
+```
+Attach to specific `attachable` object (and also attach that object to this one)
+
+```
+detachFrom(attachable)
+```
+Detach from specific `attachable` object (and also attach that object from this one)
+
+```
+detachAll() 
+```
+Detach object from all currently attached `attachable` objects
+
+```
+boolean hasAttached()
+```
+Allows to check if this object has other `attachable` objects attached to it (it is attached to some other `attachable` objects) 
+
+```
+boolean isAttachedTo(attachable)
+```
+Allows to check if the object attached to another `attachable` object
 
 
 ## Credits
