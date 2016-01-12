@@ -17,7 +17,10 @@ You can
 obj1.attachTo(obj2)
 ```
 And later
-obj2.attachedTo(obj1);
+```
+console.log( obj2.isAttachedTo(obj1) );
+// true
+```
 
 If you have different needs regarding the functionality, please add a [feature request](https://github.com/alykoshin/attachable/issues).
 
@@ -83,7 +86,7 @@ Allows to check if the object attached to another `attachable` object
 [Alexander](https://github.com/alykoshin/)
 
 
-# Links to package pages:
+## Links to package pages:
 
 [github.com](https://github.com/alykoshin/attachable) &nbsp; [npmjs.com](https://www.npmjs.com/package/attachable) &nbsp; [travis-ci.org](https://travis-ci.org/alykoshin/attachable) &nbsp; [coveralls.io](https://coveralls.io/github/alykoshin/attachable) &nbsp; [inch-ci.org](https://inch-ci.org/github/alykoshin/attachable)
 

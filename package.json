@@ -2,14 +2,15 @@
   "name": "attachable",
   "version": "0.0.2",
   "description": "Simple object to bidirectionally track its attachments (links,connections) to other `attachable` objects",
-  "main": "app/index.js",
+  "main": "./index.js",
   "scripts": {
+    "nsp": "nsp check",
     "lint": "eslint -f unix .",
     "inspect": "jsinspect",
-    "pretest": "npm run lint && npm run inspect",
+    "pretest": "npm run lint && npm run inspect && npm run nsp",
     "_test": "echo \"Warning: no test specified\" && exit 0",
     "__test": "echo \"Error: no test specified\" && exit 1",
-    "test": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*",
+    "test": "node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*",
     "test-travis": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*",
     "_commit": "git commit -am \"commit by 'npm run commit'\"",
     "_push": "git push --follow-tags",
@@ -37,7 +38,8 @@
   "homepage": "https://github.com/alykoshin/attachable",
   "dependencies": {
     "mini-debug": "0.0.3",
-    "mini-emitter": "0.0.3"
+    "mini-emitter": "0.0.3",
+    "nsp": "^2.2.0"
   },
   "devDependencies": {
     "chai": "^3.4.1",
