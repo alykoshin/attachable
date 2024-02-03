@@ -39,7 +39,7 @@
   "dependencies": {
     "mini-debug": "0.0.3",
     "mini-emitter": "0.0.3",
-    "nsp": "^2.2.0"
+    "nsp": "^3.2.1"
   },
   "devDependencies": {
     "chai": "^3.4.1",
